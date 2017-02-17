@@ -1,12 +1,6 @@
 package bet356.bet356;
 
 import static org.junit.Assert.*;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
