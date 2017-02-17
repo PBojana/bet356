@@ -36,24 +36,7 @@ public class LigaUtakmica1 {
 	@Test
 	public void test() { 
  
-		File file = new File("C:/Users/Administrator/Desktop/bet365.properties");
-    	FileInputStream fileInput = null;
-		try {
-			fileInput = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		Properties prop = new Properties();
-		
-		//load properties file
-		try {
-			prop.load(fileInput);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-			
-	    	WebDriver driver = new FirefoxDriver();
+			WebDriver driver = new FirefoxDriver();
 	    	driver.get(baseUrl);
 	    	driver.findElement(By.linkText("English")).click();
 	    	driver.findElement(By.linkText("English")).click();
@@ -61,14 +44,14 @@ public class LigaUtakmica1 {
 	    	driver.findElement(By.xpath("//div[25]")).click();
 	    	Wait.seconds(10);
 	     	//Biras liga
-	    	 driver.findElement(By.xpath("//*[text()='"+prop.getProperty("liga1")+"']")).click();
+	    	 driver.findElement(By.xpath("//*[text()='"+liga1+"']")).click();
 	    	Wait.seconds(5);
 	    	//Biras utakmica
-	    	driver.findElement(By.xpath("//*[text()='"+prop.getProperty("utakmica1")+"']")).click();
+	    	driver.findElement(By.xpath("//*[text()='"+utakmica1+"']")).click();
 	    	Wait.seconds(5);
 
 	    	String imaMain=driver.findElement(By.cssSelector("div.wl-NavBarScroller_HScroll")).getText();
-	    	assertTrue("Ne Postoi Asian Lines za "+prop.getProperty("utakmica1")+" ",imaMain.contains("Asian Lines"));
+	    	assertTrue("Ne Postoi Asian Lines za "+utakmica1+" ",imaMain.contains("Asian Lines"));
 
 
 
