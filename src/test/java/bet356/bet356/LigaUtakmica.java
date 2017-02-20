@@ -36,7 +36,7 @@ public class LigaUtakmica {
 	@Test
 	public void test() { 
  
-		File file = new File("C:/Users/Administrator/bet365.properties");
+		File file = new File("C:/Users/Administrator/Desktop/bet365.properties");
     	FileInputStream fileInput = null;
 		try {
 			fileInput = new FileInputStream(file);
