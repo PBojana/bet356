@@ -42,7 +42,7 @@ public class Totalcorner {
 	 
 	@Before
 	public void setUp() throws Exception {
-		baseUrl="http://www.totalcorner.com;
+		baseUrl="http://www.totalcorner.com";
 		liga1="Northern Ireland Reserve League";
 		utakmica1="Glentoran Reserves v Coleraine Reserves";
 		
