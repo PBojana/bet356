@@ -7,6 +7,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 public class LigaUtakmica1 {
 
@@ -48,7 +52,11 @@ public class LigaUtakmica1 {
 	    	assertTrue("Ne Postoi Asian Lines za "+utakmica1+" ",imaMain.contains("Asian Lines"));
 
 
+	    	 
+}
+}
 
-}
-}
+ 
+
+
 
