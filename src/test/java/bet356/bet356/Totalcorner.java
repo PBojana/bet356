@@ -51,7 +51,7 @@ public class Totalcorner {
 	@Test
 	public void test() { 
  
-		File file = new File("C:/Users/User07/Desktop/totalCorner.properties");
+	/*	File file = new File("C:/Users/User07/Desktop/totalCorner.properties");
     	FileInputStream fileInput = null;
 		try {
 			fileInput = new FileInputStream(file);
@@ -66,7 +66,7 @@ public class Totalcorner {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 			
 	    	WebDriver driver = new FirefoxDriver();
 	    	//driver.get(baseUrl);
@@ -86,7 +86,7 @@ public class Totalcorner {
 	    	System.out.println("Broj na denesni natprevari "+BrojNatprevari);
 	    	poraka ="Broj na denesni natprevari "+BrojNatprevari+"\n";
 	    	
-	      for (int i=1;i<=10;i++)
+	      for (int i=1;i<=BrojNatprevari-2;i++)
 	     	{
 	    	  WebElement element = driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+i+") td:nth-child(14) a:nth-child(1)"));
 	    	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
