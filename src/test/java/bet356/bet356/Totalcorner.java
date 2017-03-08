@@ -71,6 +71,7 @@ public class Totalcorner {
 	    	WebDriver driver = new FirefoxDriver();
 	    	//driver.get(baseUrl);
 	    	driver.get(baseUrl + "/");
+	    	Wait.seconds(10);
 	    	driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	    	Wait.seconds(10);
 	    	driver.findElement(By.id("inputEmail3")).clear();
