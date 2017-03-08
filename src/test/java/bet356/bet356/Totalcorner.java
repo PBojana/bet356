@@ -42,7 +42,7 @@ public class Totalcorner {
 	 
 	@Before
 	public void setUp() throws Exception {
-		baseUrl="http://www.totalcorner.com/";
+		baseUrl="http://www.totalcorner.com;
 		liga1="Northern Ireland Reserve League";
 		utakmica1="Glentoran Reserves v Coleraine Reserves";
 		
@@ -69,8 +69,8 @@ public class Totalcorner {
 		*/
 			
 	    	WebDriver driver = new FirefoxDriver();
-	    	//driver.get(baseUrl);
-	    	driver.get(baseUrl + "/");
+	    	 driver.get(baseUrl);
+	    	//driver.get(baseUrl + "/");
 	    	Wait.seconds(10);
 	    	driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	    	Wait.seconds(10);
