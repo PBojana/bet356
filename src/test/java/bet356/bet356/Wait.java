@@ -1,6 +1,6 @@
 package bet356.bet356;
 
-public class Wait1 {
+public class Wait {
 
 	 
 		public static void seconds(int second){

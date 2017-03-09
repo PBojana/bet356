@@ -1,9 +1,5 @@
 package bet356.bet356;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -15,18 +11,17 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
- 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
- 
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.JavascriptExecutor;
 
-public class Totalcorner {
+public class TotalcornerKoeficPlus {
+
 	public WebDriver driver;
 	public String baseUrl,liga,utakmica;
 	public String  liga1,utakmica1;
@@ -72,6 +67,7 @@ public class Totalcorner {
 	    	 driver.get(baseUrl);
 	    	//driver.get(baseUrl + "/");
 	    	Wait.seconds(10);
+	    	 
 	    	driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	    	Wait.seconds(10);
 	    	driver.findElement(By.id("inputEmail3")).clear();
@@ -87,11 +83,8 @@ public class Totalcorner {
 	    	System.out.println("Broj na denesni natprevari "+BrojNatprevari);
 	    	poraka ="Broj na denesni natprevari "+BrojNatprevari+"\n";
 	    	
-	      for (int i=1;i<=BrojNatprevari-1;i++)
+	      for (int i=1;i<=30;i++)
 	     	{
-	    	  System.out.println("Broj na denesni natprevari test "+BrojNatprevari);
-	    	  int BrojNatprevari1 =driver.findElements(By.cssSelector(".text-right.match_home")).size();
-	    	  System.out.println("Broj na denesni natprevari1 "+BrojNatprevari1);
 	    	  WebElement element = driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+i+") td:nth-child(14) a:nth-child(1)"));
 	    	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 
@@ -117,7 +110,7 @@ public class Totalcorner {
 	    		 
 	    		koeficientPlus=Double.parseDouble(koeficient);//+Double.parseDouble(prop.getProperty("koeficinetPlus"));
 	    				//Integer.valueOf(koeficient)+Integer.valueOf(prop.getProperty("koeficinetPlus"));
-	    	//	System.out.println("Koenficient plus "+ koeficientPlus);
+	    		System.out.println("Koenficient plus "+ koeficientPlus);
 	    		 }
 	    		else
 	    			System.out.println("Ne postoi Asian Corners"); 
@@ -134,7 +127,7 @@ public class Totalcorner {
 	    		String kolkunatprevariGosti=tablekolkuNatprevariGosti.getText();
 
 	    		String  natprevariGosti=StringUtils.substringBetween(kolkunatprevariGosti, "Win Prob.", "%");
-	    		//System.out.println("natprevariGosti"+natprevariGosti); 
+	    		System.out.println("natprevariGosti"+natprevariGosti); 
 	    		
 	    		String tocnoNatprevari;
 	    		
@@ -149,8 +142,8 @@ public class Totalcorner {
 	    		//Koi se utakmicite 
 	    		String tabelaKoiUtakmiciDomasni=driver.findElement(By.cssSelector("div#match_title_div a:nth-child(3)")).getText();
 	    		String tabelaKoiUtakmiciGosti=driver.findElement(By.cssSelector("div#match_title_div a:nth-child(4)")).getText();
-	    		//System.out.println("tabelaKoiUtakmiciDomasni "+tabelaKoiUtakmiciDomasni); 
-	    		//System.out.println("tabelaKoiUtakmiciGosti "+tabelaKoiUtakmiciGosti); 
+	    		System.out.println("tabelaKoiUtakmiciDomasni "+tabelaKoiUtakmiciDomasni); 
+	    		System.out.println("tabelaKoiUtakmiciGosti "+tabelaKoiUtakmiciGosti); 
 	    		
 	    		//Koi se utakmicite Kraj
 	    		//Domasni 
@@ -158,8 +151,7 @@ public class Totalcorner {
 	    		pomaliOdKoeficineti=0;
 	    		if (Integer.valueOf(tdKolkunatprevari)<20 ||  BrojtocniNatprevariGosti <20){
 	    			System.out.println("Nema povejke od 20 natprevari odigrani");
-	    		 poraka+= "Nema povejke od 20 natprevari odigrani"+tabelaKoiUtakmiciDomasni+"--"+tabelaKoiUtakmiciGosti+"\n";
-	    			}
+	    		 poraka+= "Nema povejke od 20 natprevari odigrani"+tabelaKoiUtakmiciDomasni+"--"+tabelaKoiUtakmiciGosti+"\n";}
 	    		else{
 	    		for (int iii=1;iii<=12;iii++){
 	    		WebElement tabelaKorenerNatprevarDomasni=driver.findElement(By.cssSelector("table#home_history_table tr:nth-child("+iii+") td:nth-child(12) span:nth-child(3)"));
@@ -258,9 +250,7 @@ public class Totalcorner {
 	    		driver.switchTo().window(tabs2.get(0));
 	    		 
 	    		Wait.seconds(10);
-	    		BrojNatprevari=BrojNatprevari1;
 	    }
-	      Wait.seconds(10);
 	      final String username = "jenkinss4e@gmail.com";
 	        final String password = "Passwords4e";
 	        String to = "pecakova.bojana@gmail.com";
@@ -280,7 +270,7 @@ public class Totalcorner {
 	        try {
 
 	            Message message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress("jenkinss4e@gmail.com"));
+	            message.setFrom(new InternetAddress("pecakova.bojana@gmail.com"));
 	            message.setRecipients(Message.RecipientType.TO,
 	                InternetAddress.parse(to));
 	            message.setSubject("A testing mail header total corner !!!");
