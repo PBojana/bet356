@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <classes>
+      <class name="bet356.bet356.LigaUtakmica">
+        <methods>
+          <include name="test"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- bet356.bet356.LigaUtakmica -->
+      <class name="bet356.bet356.Totalcorner">
+        <methods>
+          <include name="setUp"/>
+          <include name="test"/>
+        </methods>
+      </class> <!-- bet356.bet356.Totalcorner -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

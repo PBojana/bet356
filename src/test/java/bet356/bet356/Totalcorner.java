@@ -1,5 +1,9 @@
 package bet356.bet356;
 
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +19,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
  
 import org.openqa.selenium.WebDriver;
@@ -35,12 +37,15 @@ public class Totalcorner {
 	private Integer pomaliOdKoeficineti=0;
 	private Integer pogolemiOdKoeficinetiGosti=0;
 	private Integer pomaliOdKoeficinetiGosti=0;
-	public String poraka;
-	
+	public String poraka,poraka1;
+	private Integer podelbiNatprevari=1,BrojNatprevari1, BrojNatprevari,z=0;
+	 final String username = "jenkinss4e@gmail.com";
+     final String password = "Passwords4e";
+     String to = "pecakova.bojana@gmail.com";
 	@SuppressWarnings("unused")
 	private StringBuffer verificationErrors = new StringBuffer();
-	 
-	@Before
+ 
+	@BeforeMethod
 	public void setUp() throws Exception {
 		baseUrl="http://www.totalcorner.com";
 		liga1="Northern Ireland Reserve League";
@@ -86,28 +91,25 @@ public class Totalcorner {
 	    	int BrojNatprevari =driver.findElements(By.cssSelector(".text-right.match_home")).size();
 	    	System.out.println("Broj na denesni natprevari "+BrojNatprevari);
 	    	poraka ="Broj na denesni natprevari "+BrojNatprevari+"\n";
+	    	int m=0;
+	    	int l=BrojNatprevari/15;;
 	    	
-	      for (int i=1;i<=BrojNatprevari-1;i++)
+	    for (int k=1;k<=l;k++)
+
+	   {
+	    	for (int j=1;j<=15;j++)
 	     	{
-	    	  System.out.println("Broj na denesni natprevari test "+BrojNatprevari);
-	    	  int BrojNatprevari1 =driver.findElements(By.cssSelector(".text-right.match_home")).size();
-	    	  System.out.println("Broj na denesni natprevari1 "+BrojNatprevari1);
-	    	  WebElement element = driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+i+") td:nth-child(14) a:nth-child(1)"));
+	    	z=z+1;
+	    	WebElement element = driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+z+") td:nth-child(14) a:nth-child(1)"));
 	    	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-
-	    		        
-	    //	driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+i+") td:nth-child(14) a:nth-child(1)")).click();
-	    		Wait.seconds(10);
-
-	    		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
-	    		driver.switchTo().window(tabs2.get(1));
-		     	//////driver.findElement(By.xpath("(//button[@type='button'])[10]")).click();
+	    	Wait.seconds(10);
+	    	ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    	driver.switchTo().window(tabs2.get(1));
 	    		Wait.seconds(10);
 	    		WebElement tabelaCorners=driver.findElement(By.id("bet_div"));
 	    		WebElement tdCorners=tabelaCorners.findElement(By.xpath("//*[contains(@class,'panel-body')][1]"));
 	    		String corners=tdCorners.getText();
-	    		//System.out.println("--------- "+corners);
-	    		 if (corners.contains("Asian Corners")){
+	    	if (corners.contains("Asian Corners")){
 	    		String corners1=StringUtils.substringBetween(corners, "Asian Corners", ")");
 	    		///System.out.println("Asian Corners 1 "+ corners1 );
 	    		 
@@ -191,9 +193,7 @@ public class Totalcorner {
 		    	 	String kojNatprevar=tabelaKorenerNatprevarDomasni.getText();
 		    	 //////	System.out.println("kojNatprevar "+kojNatprevar);  
 		    	 	Double kojNatprevar1=Double.parseDouble(kojNatprevar);
-		    	  
 		    		 int retval1 = Double.compare( kojNatprevar1, koeficientPlus);
-		    		    
 		    	     if(retval1 > 0) {
 		    	    	 pogolemiOdKoeficinetiGosti =pogolemiOdKoeficinetiGosti + 1;
 		    	     }
@@ -206,7 +206,6 @@ public class Totalcorner {
 		    		System.out.println(tabelaKoiUtakmiciGosti+" Gosti- Pomali od koeficent plus "+ pomaliOdKoeficinetiGosti);
 		    		poraka+=tabelaKoiUtakmiciGosti+" Gosti- Pomali od koeficent plus "+ pomaliOdKoeficinetiGosti+"\n";
 		    	//Gosti Kraj
-
 
 		    		int zbirPogelemiKoeficienti=pogolemiOdKoeficinetiGosti+pogolemiOdKoeficineti;
 		    		///System.out.println("Zbir"+ zbirPogelemiKoeficienti);
@@ -258,45 +257,240 @@ public class Totalcorner {
 	    		driver.switchTo().window(tabs2.get(0));
 	    		 
 	    		Wait.seconds(10);
-	    		BrojNatprevari=BrojNatprevari1;
+	    		BrojNatprevari1 =driver.findElements(By.cssSelector(".text-right.match_home")).size();
+		    	System.out.println("Rcount "+BrojNatprevari1);
+	    		 if (BrojNatprevari!=BrojNatprevari1)
+	    		 {
+	    			 m+=BrojNatprevari-BrojNatprevari1;
+	    			 z=z-m;
+	    			 BrojNatprevari=BrojNatprevari1;
+	    		 }
 	    }
-	      Wait.seconds(10);
-	      final String username = "jenkinss4e@gmail.com";
-	        final String password = "Passwords4e";
-	        String to = "pecakova.bojana@gmail.com";
-	        Properties props = new Properties();
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.starttls.enable", "true");
-	        props.put("mail.smtp.host", "smtp.gmail.com");
-	        props.put("mail.smtp.port", "587");
+	    	 Wait.seconds(10);
+		       
+		        Properties props = new Properties();
+		        props.put("mail.smtp.auth", "true");
+		        props.put("mail.smtp.starttls.enable", "true");
+		        props.put("mail.smtp.host", "smtp.gmail.com");
+		        props.put("mail.smtp.port", "587");
 
-	        Session session = Session.getInstance(props,
-	          new javax.mail.Authenticator() {
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(username, password);
-	            }
-	          });
+		        Session session = Session.getInstance(props,
+		          new javax.mail.Authenticator() {
+		            protected PasswordAuthentication getPasswordAuthentication() {
+		                return new PasswordAuthentication(username, password);
+		            }
+		          });
 
-	        try {
+		        try {
 
-	            Message message = new MimeMessage(session);
-	            message.setFrom(new InternetAddress("jenkinss4e@gmail.com"));
-	            message.setRecipients(Message.RecipientType.TO,
-	                InternetAddress.parse(to));
-	            message.setSubject("A testing mail header total corner !!!");
-	            message.setText(poraka);
+		            Message message = new MimeMessage(session);
+		            message.setFrom(new InternetAddress("jenkinss4e@gmail.com"));
+		            message.setRecipients(Message.RecipientType.TO,
+		                InternetAddress.parse(to));
+		            message.setSubject("A testing mail header total corner !!!");
+		            message.setText(poraka);
+		            Transport.send(message);
+		            System.out.println("Done");
 
-	            Transport.send(message);
+		        } 
+		        catch (MessagingException e) 
+		        {
+		            // throw new RuntimeException(e);
+		            System.out.println("Username or Password are incorrect ... exiting !");
+		        }
+	  }
+	   
+	   for (int j=z;j<=BrojNatprevari-2;j++)
+	   {	
+   	         System.out.println("Rcount 1 "+BrojNatprevari);
+		   
+		   WebElement element = driver.findElement(By.cssSelector("table#inplay_match_table tr:nth-child("+j+") td:nth-child(14) a:nth-child(1)"));
+	    	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+	    	Wait.seconds(10);
+	    	ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
+	    	driver.switchTo().window(tabs2.get(1));
+	    		Wait.seconds(10);
+	    		WebElement tabelaCorners=driver.findElement(By.id("bet_div"));
+	    		WebElement tdCorners=tabelaCorners.findElement(By.xpath("//*[contains(@class,'panel-body')][1]"));
+	    		String corners=tdCorners.getText();
+	    	if (corners.contains("Asian Corners")){
+	    		String corners1=StringUtils.substringBetween(corners, "Asian Corners", ")");
+	    		///System.out.println("Asian Corners 1 "+ corners1 );
+	    		 
+	    		String koeficient= corners1.substring(corners1.lastIndexOf("(")+1);
+	    	 	
+	    		System.out.println("Koenficient "+ koeficient);
+	    		 
+	    		koeficientPlus=Double.parseDouble(koeficient);//+Double.parseDouble(prop.getProperty("koeficinetPlus"));
+	    				//Integer.valueOf(koeficient)+Integer.valueOf(prop.getProperty("koeficinetPlus"));
+	    	//	System.out.println("Koenficient plus "+ koeficientPlus);
+	    		 }
+	    		else
+	    			System.out.println("Ne postoi Asian Corners"); 
+	    					
+	    		WebElement kolkuNatprevari=driver.findElement(By.xpath("//*[contains(@class,'home_stats_table')]"));
+	    		WebElement trkolkuNatprevari=kolkuNatprevari.findElement(By.xpath("//tr/td[2]"));
+	    		String tdKolkunatprevari=trkolkuNatprevari.getText();
+	    	
+	    		System.out.println("Broj na odigrani natprevari domasni "+tdKolkunatprevari);
+	    		
 
-	            System.out.println("Done");
+	    		WebElement divElement=driver.findElement(By.xpath("//div[contains(@class,'moble_no_left_padding')]"));
+	    		WebElement tablekolkuNatprevariGosti=divElement.findElement(By.xpath("//table[contains(@class,'away_stats_table')]"));
+	    		String kolkunatprevariGosti=tablekolkuNatprevariGosti.getText();
 
-	        } 
+	    		String  natprevariGosti=StringUtils.substringBetween(kolkunatprevariGosti, "Win Prob.", "%");
+	    		//System.out.println("natprevariGosti"+natprevariGosti); 
+	    		
+	    		String tocnoNatprevari;
+	    		
+	    			tocnoNatprevari=natprevariGosti.substring(7,9);
+	    		if (tocnoNatprevari.contains(" "))
+	    			tocnoNatprevari=natprevariGosti.substring(7,8);
+	    		
+	    		System.out.println("Broj na odigrani natprevari gosti "+tocnoNatprevari); 
+	    		
+	    		Integer BrojtocniNatprevariGosti=Integer.valueOf(tocnoNatprevari);
+	    		
+	    		//Koi se utakmicite 
+	    		String tabelaKoiUtakmiciDomasni=driver.findElement(By.cssSelector("div#match_title_div a:nth-child(3)")).getText();
+	    		String tabelaKoiUtakmiciGosti=driver.findElement(By.cssSelector("div#match_title_div a:nth-child(4)")).getText();
+	    		//System.out.println("tabelaKoiUtakmiciDomasni "+tabelaKoiUtakmiciDomasni); 
+	    		//System.out.println("tabelaKoiUtakmiciGosti "+tabelaKoiUtakmiciGosti); 
+	    		
+	    		//Koi se utakmicite Kraj
+	    		//Domasni 
+	    		pogolemiOdKoeficineti=0;
+	    		pomaliOdKoeficineti=0;
+	    		if (Integer.valueOf(tdKolkunatprevari)<20 ||  BrojtocniNatprevariGosti <20){
+	    			System.out.println("Nema povejke od 20 natprevari odigrani");
+	    		 poraka1+= "Nema povejke od 20 natprevari odigrani"+tabelaKoiUtakmiciDomasni+"--"+tabelaKoiUtakmiciGosti+"\n";
+	    			}
+	    		else{
+	    		for (int iii=1;iii<=12;iii++){
+	    		WebElement tabelaKorenerNatprevarDomasni=driver.findElement(By.cssSelector("table#home_history_table tr:nth-child("+iii+") td:nth-child(12) span:nth-child(3)"));
+	    	 	String kojNatprevar=tabelaKorenerNatprevarDomasni.getText();
+	    	 	//////System.out.println("kojNatprevar "+kojNatprevar);  
+	    	 	Double kojNatprevar1=Double.parseDouble(kojNatprevar);
+	    	  
+	    		 int retval = Double.compare( kojNatprevar1, koeficientPlus);
+	    		    
+	    	     if(retval > 0) {
+	    	    	 pogolemiOdKoeficineti =pogolemiOdKoeficineti + 1;
+	    	     }
+	    	     else if(retval < 0) {
+	    	    	 pomaliOdKoeficineti = pomaliOdKoeficineti + 1; 
+	    	     }
+	    		}
+	    		System.out.println(tabelaKoiUtakmiciDomasni+" -Pogolemi od koeficent plus "+ pogolemiOdKoeficineti);
+	    		poraka1+="Broj na odigrani natprevari domasni "+tabelaKoiUtakmiciDomasni+"---"+tdKolkunatprevari+"\n";
+	    		poraka1+="Broj na odigrani natprevari gosti "+tabelaKoiUtakmiciGosti+"---"+tocnoNatprevari+"\n";
+	    		poraka1+=tabelaKoiUtakmiciDomasni+" -Pogolemi od koeficent plus "+ pogolemiOdKoeficineti + "\n";
+	    		System.out.println(tabelaKoiUtakmiciDomasni+ " -Pomali od koeficent plus "+ pomaliOdKoeficineti);
+	    		poraka1+=tabelaKoiUtakmiciDomasni+ " -Pomali od koeficent plus "+ pomaliOdKoeficineti+"\n";
+	    		//Domasni Kraj
+	    		//Gosti
+	    		pogolemiOdKoeficinetiGosti=0;
+	    		pomaliOdKoeficinetiGosti=0;
+	    		for (int ii=1;ii<=12;ii++){
+		    		WebElement tabelaKorenerNatprevarDomasni=driver.findElement(By.cssSelector("table#away_history_table tr:nth-child("+ii+") td:nth-child(12) span:nth-child(3)"));
+		    	 	String kojNatprevar=tabelaKorenerNatprevarDomasni.getText();
+		    	 //////	System.out.println("kojNatprevar "+kojNatprevar);  
+		    	 	Double kojNatprevar1=Double.parseDouble(kojNatprevar);
+		    		 int retval1 = Double.compare( kojNatprevar1, koeficientPlus);
+		    	     if(retval1 > 0) {
+		    	    	 pogolemiOdKoeficinetiGosti =pogolemiOdKoeficinetiGosti + 1;
+		    	     }
+		    	     else if(retval1 < 0) {
+		    	    	 pomaliOdKoeficinetiGosti = pomaliOdKoeficinetiGosti + 1; 
+			     }
+		    		}
+		    		System.out.println(tabelaKoiUtakmiciGosti+" Gosti -Pogolemi od koeficent plus "+ pogolemiOdKoeficinetiGosti);
+		    		poraka1+=tabelaKoiUtakmiciGosti+" Gosti -Pogolemi od koeficent plus "+ pogolemiOdKoeficinetiGosti+"\n";
+		    		System.out.println(tabelaKoiUtakmiciGosti+" Gosti- Pomali od koeficent plus "+ pomaliOdKoeficinetiGosti);
+		    		poraka1+=tabelaKoiUtakmiciGosti+" Gosti- Pomali od koeficent plus "+ pomaliOdKoeficinetiGosti+"\n";
+		    	//Gosti Kraj
 
-	        catch (MessagingException e) 
-	        {
-	            // throw new RuntimeException(e);
-	            System.out.println("Username or Password are incorrect ... exiting !");
-	        }
+		    		int zbirPogelemiKoeficienti=pogolemiOdKoeficinetiGosti+pogolemiOdKoeficineti;
+		    		///System.out.println("Zbir"+ zbirPogelemiKoeficienti);
+		    			if (zbirPogelemiKoeficienti<=5){
+		    			System.out.println( tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"   -Go zadvoluva uslovot Komibinacija domasni "+pogolemiOdKoeficineti+"gosti"+pogolemiOdKoeficinetiGosti);
+		    			poraka1+=tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"---Go zadvoluva uslovot Komibinacija domasni "+pogolemiOdKoeficineti+"gosti"+pogolemiOdKoeficinetiGosti;
+		    			}
+		    			else if(pogolemiOdKoeficineti==1&&pogolemiOdKoeficinetiGosti==5 )
+		    			{
+		    				System.out.println("Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+		    				poraka1+="Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\n";
+		    			}
+		    			else if(pogolemiOdKoeficineti==5&&pogolemiOdKoeficinetiGosti==1 )
+		    			{
+		    				System.out.println("Utakmicata Go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+		    				poraka1+="Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\\n";
+				    		
+		    			}
+		    			else if(pogolemiOdKoeficineti==3&&pogolemiOdKoeficinetiGosti==3 )
+		    			{
+		    				System.out.println("Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+		    				poraka1+="Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\n";
+				    		
+		    			}
+		    			
+		    			int zbirPomaliKoeficienti=pomaliOdKoeficinetiGosti+pomaliOdKoeficineti;
+			    	/////	System.out.println("Zbir"+ zbirPomaliKoeficienti);
+			    			if (zbirPomaliKoeficienti<=5){
+			    			System.out.println("Go zadvoluva uslovot kombinacijata "+tabelaKoiUtakmiciDomasni+"  "+pomaliOdKoeficineti+" "+" tabelaKoiUtakmiciGosti-"+pomaliOdKoeficinetiGosti);
+			    			poraka1+="Go zadvoluva uslovot kombinacijata "+tabelaKoiUtakmiciDomasni+"  "+pomaliOdKoeficineti+" "+" tabelaKoiUtakmiciGosti-"+pomaliOdKoeficinetiGosti+"\n";
+			    			}
+			    			else if(pomaliOdKoeficineti==1&&pomaliOdKoeficinetiGosti==5 )
+			    			{
+			    				System.out.println("Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+			    			poraka1+=" Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\n";
+			    			}
+			    			else if(pomaliOdKoeficineti==5&&pomaliOdKoeficinetiGosti==1 )
+			    			{
+			    				System.out.println("Utakmicata Go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+			    			poraka1+="Utakmicata Go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\n";
+			    			}
+			    			else if(pomaliOdKoeficineti==3&&pomaliOdKoeficinetiGosti==3 )
+			    			{
+			    				System.out.println("Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti);
+			    			poraka1+=" Utakmicata go zadvoluva uslovot "+tabelaKoiUtakmiciDomasni+"---"+tabelaKoiUtakmiciGosti+"\n";
+			    			}
+	    		}
+	    		driver.switchTo().window(tabs2.get(1)).close();
+	    		driver.switchTo().window(tabs2.get(0));
+	    		 
+	    		Wait.seconds(10);
+	    		
+	   }
+	   Properties props1 = new Properties();
+       props1.put("mail.smtp.auth", "true");
+       props1.put("mail.smtp.starttls.enable", "true");
+       props1.put("mail.smtp.host", "smtp.gmail.com");
+       props1.put("mail.smtp.port", "587");
+	   			Session session = Session.getInstance(props1,
+		        new javax.mail.Authenticator() {
+		         protected PasswordAuthentication getPasswordAuthentication() {
+		              return new PasswordAuthentication(username, password);
+		            }
+		          });  
+		        try {
+
+		            Message message = new MimeMessage(session);
+		            message.setFrom(new InternetAddress("jenkinss4e@gmail.com"));
+		            message.setRecipients(Message.RecipientType.TO,
+		                InternetAddress.parse(to));
+		            message.setSubject("A testing mail header total corner !!!");
+		            message.setText(poraka1);
+		            Transport.send(message);
+		            System.out.println("Done");
+
+		        } 
+		        catch (MessagingException e) 
+		        {
+		            // throw new RuntimeException(e);
+		            System.out.println("Username or Password are incorrect ... exiting !");
+		        }
 }}
 
 

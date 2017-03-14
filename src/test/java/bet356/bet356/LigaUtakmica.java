@@ -1,7 +1,9 @@
 package bet356.bet356;
 
-import static org.junit.Assert.*;
-
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,8 +17,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -34,8 +34,8 @@ public class LigaUtakmica {
 	
 	@SuppressWarnings("unused")
 	private StringBuffer verificationErrors = new StringBuffer();
-	 
-	@Before
+	
+	@BeforeMethod
 	public void setUp() throws Exception {
 		 
 		baseUrl="https://www.bet365.com/?&cb=10325414067#/HO/";
