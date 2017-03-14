@@ -16,7 +16,6 @@
      	<groupId>junit</groupId>
       	<artifactId>junit</artifactId>
       	<version>4.12</version>
-      
    	 </dependency> 
    	 
    	<dependency>
@@ -24,17 +23,23 @@
         <artifactId>selenium-java</artifactId>
         <version>2.53.0</version>
 	</dependency> 
-    
-     
-  	 <dependency>
-  	  <groupId>org.testng</groupId>
-  	  <artifactId>testng</artifactId>
-  	  <version>6.11</version>
-	 </dependency>
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>3.0</version>
+  
+  <dependency>
+  <groupId>org.apache.commons</groupId>
+  <artifactId>commons-lang3</artifactId>
+  <version>3.5</version>
+</dependency>
+	  <dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.1</version>
+</dependency>
+
+	  <dependency>
+    <groupId>javax.activation</groupId>
+    <artifactId>activation</artifactId>
+    <version>1.1</version>
+ 
 </dependency>
   </dependencies> 
 </project>
