@@ -92,7 +92,7 @@ public class LigaUtakmica {
 
 	        final String username = "jenkinss4e@gmail.com";
 	        final String password = "Passwords4e";
-	        String to = "bo_sale@hotmail.com";
+	        String to = "tomi.pocevski@gmail.com";
 	        		
 	        Properties props = new Properties();
 	        props.put("mail.smtp.auth", "true");
