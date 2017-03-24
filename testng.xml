@@ -4,7 +4,6 @@
   <test name="Test">
     <classes>
       <class name="bet356.bet356.LigaUtakmica"/>
-      <class name="bet356.bet356.Totalcorner"/>
-    </classes>
+     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
